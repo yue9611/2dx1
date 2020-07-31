@@ -16,23 +16,20 @@ export default class Level extends cc.Component {
                 console.log(err);
             }
             this.prefabData = data;
-            console.log(this.prefabData);
             if (this.prefabData) {
                 this.node.active = true;
             } else {
                 console.log("prefab load fail");
             }
-            this.nihao();
         })
         this.score = 0;
-        this.node.active = true;
     }
 
     onLoad() {
         this.reportCard = this.node.getChildByName("up").getChildByName("score").getComponent(cc.Label);
         this.majorRegion = this.node.getChildByName("centre");
         EventSrever.on(Events.nihao, this.nihao, this);
-        EventSrever.on(21, this.nihao, this);
+        EventSrever.off(Events.nihao, this.nihao, this);
     }
     start() {
         this.resetScore();

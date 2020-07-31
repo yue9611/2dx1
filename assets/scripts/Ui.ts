@@ -48,7 +48,7 @@ export default class Ui extends cc.Component {
         console.log("load start");
     }
     loadOver() {
-        this.loading.active = true;
+        this.loading.active = false;
         this.step = () => { };
         console.log("load over");
     }
