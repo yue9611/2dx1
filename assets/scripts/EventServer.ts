@@ -1,10 +1,9 @@
 
-
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class EventSrever extends cc.Component {
-    static eventData = {};
+    static eventData: { [key: string]: EventData } = {};
     static on(type: string | number, func: Function, tager: Object) {
         if (this.eventData[type] != null) {
             let flag = 0;

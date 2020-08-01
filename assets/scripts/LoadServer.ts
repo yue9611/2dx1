@@ -11,5 +11,4 @@ export default class LoadServer extends cc.Component {
             callBack(err, data)
         });
     }
-
 }

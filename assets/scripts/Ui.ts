@@ -1,9 +1,3 @@
-// Learn TypeScript:
-//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 import EventSrever from "./EventServer";
 
@@ -11,7 +5,9 @@ const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class Ui extends cc.Component {
+    //主界面
     home: cc.Node = null;
+    //加载界面
     loading: cc.Node = null;
     loadingWord: cc.Label = null;
     time: number = 0;
@@ -25,7 +21,7 @@ export default class Ui extends cc.Component {
         this.reset();
         this.node.active = true;
     }
-    onload() {
+    onEnable() {
         this.home.active = true;
         this.loading.active = false;
         this.step = this.homeing;
@@ -43,16 +39,19 @@ export default class Ui extends cc.Component {
         console.log("home");
     }
     loadStart() {
+        this.reset();
         this.loading.active = true;
         this.step = this.load;
         console.log("load start");
     }
     loadOver() {
+        this.reset();
         this.loading.active = false;
         this.step = () => { };
+        this.node.active = false;
         console.log("load over");
     }
-    updata(dt) {
+    update(dt) {
         this.time += dt;
         if (this.time >= 1) {
             this.time--;

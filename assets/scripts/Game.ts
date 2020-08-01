@@ -12,14 +12,34 @@ export default class Game extends cc.Component {
     onLoad() {
         this.ui = this.node.getChildByName("ui").getComponent(Ui);
         this.level = this.node.getChildByName("level").getComponent(Level);
-        EventSrever.on("23", this.nihao, this);
+    }
+    onEnable() {
+        this.onEvent();
+    }
+    onDisable() {
+        this.offEvent();
+    }
+    onEvent() {
+        this.node.on("touchstart", this.touchStart, this);
+        this.node.on("touchmove", this.touchMove, this);
+        this.node.on("touchend", this.touchEnd, this);
+    }
+    offEvent() {
+        this.node.off("touchstart", this.touchStart, this);
+        this.node.off("touchmove", this.touchMove, this);
+        this.node.off("touchend", this.touchEnd, this);
+    }
+    touchStart(e: cc.Event.EventTouch) {
+        this.level.touchStart(e);
+    }
+    touchMove(e: cc.Event.EventTouch) {
+        this.level.touchMove(e);
+    }
+    touchEnd(e: cc.Event.EventTouch) {
+        this.level.touchEnd(e);
     }
     start() {
         this.ui.init();
         this.level.init();
     }
-    nihao() {
-        console.log("nihao!Game");
-    }
-    
 }
